@@ -1,25 +1,33 @@
-practice
+Practice
 ========
 
-my python practice project
+This is the place for my python practice projects.
 
-huffman
-====
-
-My practice project after re-visited the Huffman code in Data structure.
-
-how-to
+Huffman
 ----
+
+My practice project after re-visited the idea of Huffman tree in Data structure.
+
+### how-to
 
 Both tree.py and huffman.py are needed.
 
     import huffman
     
     # a tuple with dict and coded message will return
-    codetuple = huffman.encode('some words that needs to encode')
+    codetuple = huffman.encode('some words to be encoded.')
     
-    # decode taskes two args, a encode dict and a coded message.
+    # decode takes two args, an encode dict and a coded message.
     decodemessage = huffman.decode(codetuple[0], codetuple[1])
-  
-The function will return a tuple. First value is a dict that contains encode info.
-The second is the encoded bits.
+
+encode() takes str and returns the encoding dict and encoded message.
+decode() takes dict and str and returns the decoded message.
+
+### TODO
+
+1. test it with an actual full-text document.
+
+1. unit tests.
+
+1. make it able to encode/decode actual files.
+
