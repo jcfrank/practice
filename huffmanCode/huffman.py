@@ -16,6 +16,20 @@ def encode(message):
         encoded = encoded + dictobj.encdict[c]
     return dictobj.encdict, encoded
 
+def decode(encdict, message):
+    invdict = {v:k for k, v in encdict.items()}
+    res = ''
+    keyword = ''
+    inx = 0
+    while inx <= len(message) - 1:
+        keyword = message[inx]
+        while not invdict.__contains__(keyword):
+            inx += 1
+            keyword = keyword + message[inx]
+        res = res + invdict.get(keyword)
+        inx += 1
+    return res
+
 def __getcharlist(message):
     cdict = {}
     for c in message:
