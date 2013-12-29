@@ -1,9 +1,13 @@
 from tree import TreeNode
 
-class EncodeDict(object):
-    encdict = {}
+DEBUG = True
+
+class EncodeDict():
+    def __init__(self):
+        self.encdict = {}
 
 def encode(message):
+    if DEBUG: print('orignal=' + message)
     tlist = __getcharlist(message)
     # create Huffman tree
     root = getHuffmanTree(tlist)
@@ -14,10 +18,12 @@ def encode(message):
     encoded = ''
     for c in message:
         encoded = encoded + dictobj.encdict[c]
+    if DEBUG: print('encoded=' + encoded)
     return dictobj.encdict, encoded
 
 def decode(encdict, message):
     invdict = {v:k for k, v in encdict.items()}
+    if DEBUG: __printDict(invdict)
     res = ''
     keyword = ''
     inx = 0
@@ -25,9 +31,13 @@ def decode(encdict, message):
         keyword = message[inx]
         while not invdict.__contains__(keyword):
             inx += 1
+            if inx > len(message) - 1:
+                print('cannot find decode key:' + keyword)
+                break
             keyword = keyword + message[inx]
         res = res + invdict.get(keyword)
         inx += 1
+    if DEBUG: print('decoded=' + res)
     return res
 
 def __getcharlist(message):
@@ -40,7 +50,10 @@ def __getcharlist(message):
             cdict[c] = node
         else:
             cdict[c].count += 1
-    return list(cdict.copy().values())
+    res = list(cdict.copy().values())
+    if DEBUG:
+        __printList(res)
+    return res
 
 def getHuffmanTree(nodelist):
     tlist = nodelist.copy()
@@ -57,24 +70,32 @@ def getHuffmanTree(nodelist):
             newnode.left = node2
             newnode.right = node1
         tlist.append(newnode)
+    #TODO print Huffman tree
     return tlist
 
 def fillEncodeDict(root, dictionary):
     # walk the tree and update its encode dict.
     __recursiveWalk(root, '', dictionary=dictionary)
-    __printDict(dictionary.encdict)
+    if DEBUG:
+        __printDict(dictionary.encdict)
 
 def __recursiveWalk(node, code, dictionary):
     if node.left is not None:
-        __recursiveWalk(node.left, code = code + '0', dictionary=dictionary)
+        __recursiveWalk(node.left, code=code + '0', dictionary=dictionary)
     
     if node.right is not None:
-        __recursiveWalk(node.right, code = code + '1', dictionary=dictionary)
+        __recursiveWalk(node.right, code=code + '1', dictionary=dictionary)
     
     if node.left is None and node.right is None:
         #print('node:' + node.data + ', code:' + code)
+        if code == '': code = '0'
         dictionary.encdict[node.data] = code
 
 def __printDict(encdict):
-    print('print encode dict.')
-    print(str(encdict))
+    print('dict=' + str(encdict))
+
+def __printList(enclist):
+    enclist.sort(key=lambda treenode: treenode.count)
+    plist = [str(treenode) for treenode in enclist]
+    print('encode list=' + str(plist))
+
