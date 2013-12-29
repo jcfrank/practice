@@ -1,0 +1,123 @@
+<h1>Google OAuth2 and Google In-app Purchase API</h1>
+
+<p>Resources and code sample.</p>
+
+<hr />
+
+<h2>What is OAuth?</h2>
+
+<p>OAuth is an open standard that provides methods for clients (such as our back end server) to access users' resources without having to share their credentials.</p>
+
+<h2>OAuth 2 Flow</h2>
+
+<p><a href="https://developers.google.com/accounts/docs/OAuth2InstalledApp?hl=zh-TW">OAuth2 flow for installed app</a></p>
+
+<p><a href="https://developers.google.com/accounts/docs/OAuth2WebServer?hl=zh-TW">OAuth2 flow for web server</a></p>
+
+<ol>
+<li>user authorization</li>
+<li>get authorization code</li>
+<li>get refresh token and access token</li>
+<li>use access token to call API</li>
+<li>use refresh token to get a new access token</li>
+</ol>
+
+<h3>user authorization</h3>
+
+<p>Form a request to OAuth URL with parameters as uery string:</p>
+
+<p><code>https://accounts.google.com/o/oauth2/auth</code></p>
+
+<p><img src="/home/frankchen/Documents/GoogleApi/oauth1.png" alt="oauth parameters" title="" /></p>
+
+<p><img src="/home/frankchen/Documents/GoogleApi/oauth2.png" alt="user authorization" title="" /></p>
+
+<h3>get authorization code from response</h3>
+
+<p>response will be sent to redirect_uri.</p>
+
+<h3>exchange authorization code for a refresh token and an access token</h3>
+
+<p>POST request to token URL with parameters as query string.</p>
+
+<p>grant<em>type should be set to "authorization</em>code".</p>
+
+<p><code>https://accounts.google.com/o/oauth2/token</code></p>
+
+<p><img src="/home/frankchen/Documents/GoogleApi/oauth3.png" alt="tokens parameters" title="" /></p>
+
+<h3>use access token to call API</h3>
+
+<p>Append it in query string or put it in Authorization header.</p>
+
+<p><strong>Use in query string</strong></p>
+
+<p><code>https://www.googleapis.com/androidpublisher/v1.1/applications/{package_name}/inapp/{product_id}/purchases/{purchase_token}?access_token={access token}</code></p>
+
+<h3>use refresh token to get a new access token</h3>
+
+<p>POST request to token URL with parameters.</p>
+
+<p>grant<em>type set to "refresh</em>token".</p>
+
+<p><code>https://accounts.google.com/o/oauth2/token</code></p>
+
+<p><img src="/home/frankchen/Documents/GoogleApi/oauth4.png" alt="tokens parameters" title="" /></p>
+
+<h2>Google OAuth 2 Playground</h2>
+
+<p>Google provides a very convenient site for developers to try OAuth 2.</p>
+
+<p><a href="https://developers.google.com/oauthplayground/">OAuth2 playground</a></p>
+
+<hr />
+
+<h3>Play it with Google Api Console</h3>
+
+<h3>Code Sample for using refresh token to get access token</h3>
+
+<h2>Call API With Access Token</h2>
+
+<p><strong>Using access token in query string</strong></p>
+
+<p><code>https://www.googleapis.com/androidpublisher/v1.1/applications/{package_name}/inapp/{product_id}/purchases/{purchase_token}?access_token={access token}</code></p>
+
+<p><strong>API response:</strong></p>
+
+<p><img src="/home/frankchen/Documents/GoogleApi/apiResult.png" alt="api result" title="" /></p>
+
+<h3>Code Sample</h3>
+
+<h2>Android Publisher API</h2>
+
+<h3>Code Sample</h3>
+
+<h3>Response</h3>
+
+<hr />
+
+<h1>Resources</h1>
+
+<p><a href="https://cloud.google.com/console?redirected=true#/project/apps~magnetic-port-398">Google API Console</a></p>
+
+<p><a href="https://developers.google.com/android-publisher/v1_1/">Google Play Android Developers API</a></p>
+
+<p><a href="https://developers.google.com/api-client-library/java/apis/androidpublisher/v1.1">Google API Client Library for Java</a></p>
+
+<p><a href="https://developers.google.com/resources/api-libraries/documentation/androidpublisher/v1.1/java/latest/">Android Publisher API JavaDoc</a></p>
+
+<p><a href="http://javadoc.google-oauth-java-client.googlecode.com/hg/1.17.0-rc/index.html?com/google/api/client/auth/oauth2/package-summary.html">Google OAuth2 Client Library for Java JavaDoc</a></p>
+
+<p><a href="http://developer.android.com/google/play/billing/api.html">Google Play In-app Billing Flow</a></p>
+
+<p><a href="https://developers.google.com/oauthplayground/">Google OAuth 2 Playground</a></p>
+
+<p><a href="https://code.google.com/p/google-api-java-client/source/browse?repo=samples">Google API Java Client Samples</a></p>
+
+<p><a href="https://developers.google.com/accounts/docs/OAuth2InstalledApp?hl=zh-TW">OAuth2 flow for installed app</a></p>
+
+<p><a href="https://developers.google.com/accounts/docs/OAuth2WebServer?hl=zh-TW">OAuth2 flow for web server</a></p>
+
+<p><a href="http://ikaisays.com/2013/07/19/debugging-your-google-oauth-2-0-token-when-you-get-http-401s-or-403s/">4xx response code</a></p>
+
+<p><a href="http://developer.android.com/google/play/billing/billing_reference.html">Bliing Reference</a></p>
