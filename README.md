@@ -1,7 +1,7 @@
 Practice
 ========
 
-This is the place for my python practice projects.
+This is the place for my practice projects.
 
 Huffman
 ----
@@ -30,4 +30,9 @@ decode() takes dict and str and returns the decoded message.
 1. unit tests.
 
 1. make it able to encode/decode actual files.
+
+Find Primes
+-----------
+
+Just a practice of a typical problem.
 
